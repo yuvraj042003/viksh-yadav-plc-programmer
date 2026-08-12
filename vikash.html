@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vikash Yadav | PLC Programmer & Industrial Automation</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #020617;
+            color: #e5e7eb;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ==============================
+           THREE JS BACKGROUND
+        ============================== */
+
+        #three-container {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background:
+                radial-gradient(circle at center,
+                #082f49 0%,
+                #020617 45%,
+                #00030a 100%);
+        }
+
+        #three-container::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    rgba(2, 6, 23, 0.25),
+                    rgba(2, 6, 23, 0.8)
+                );
+            pointer-events: none;
+        }
+
+        /* ==============================
+           NAVBAR
+        ============================== */
+
+        .navbar {
+            background: rgba(2, 6, 23, 0.65);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+        }
+
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: #38bdf8 !important;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: #cbd5e1 !important;
+            margin-left: 20px;
+            transition: .3s;
+        }
+
+        .nav-link:hover {
+            color: #38bdf8 !important;
+        }
+
+        /* ==============================
+           HERO
+        ============================== */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .badge-tech {
+            display: inline-block;
+            padding: 9px 18px;
+            border-radius: 50px;
+            border: 1px solid rgba(56, 189, 248, .5);
+            background: rgba(14, 165, 233, .08);
+            color: #38bdf8;
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 25px rgba(14, 165, 233, .15);
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(40px, 7vw, 85px);
+            font-weight: 800;
+            line-height: 1.05;
+            color: white;
+        }
+
+        .hero h1 span {
+            color: #38bdf8;
+            text-shadow:
+                0 0 10px rgba(56, 189, 248, .6),
+                0 0 40px rgba(56, 189, 248, .2);
+        }
+
+        .hero h2 {
+            color: #94a3b8;
+            margin-top: 20px;
+            font-size: clamp(20px, 3vw, 32px);
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-top: 25px;
+            max-width: 750px;
+        }
+
+        .btn-main {
+            margin-top: 30px;
+            padding: 14px 30px;
+            border-radius: 8px;
+            border: 1px solid #38bdf8;
+            background: #0284c7;
+            color: white;
+            font-weight: 600;
+            transition: .3s;
+            box-shadow: 0 0 25px rgba(14, 165, 233, .3);
+        }
+
+        .btn-main:hover {
+            background: #38bdf8;
+            color: #020617;
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(56, 189, 248, .5);
+        }
+
+        /* ==============================
+           SECTIONS
+        ============================== */
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin-bottom: 60px;
+            color: white;
+        }
+
+        .section-title span {
+            color: #38bdf8;
+        }
+
+        /* ==============================
+           GLASS CARDS
+        ============================== */
+
+        .glass-card {
+            height: 100%;
+            padding: 30px;
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(15, 23, 42, .8),
+                    rgba(8, 47, 73, .35)
+                );
+
+            border: 1px solid rgba(56, 189, 248, .15);
+
+            backdrop-filter: blur(15px);
+
+            transition:
+                transform .4s,
+                border .4s,
+                box-shadow .4s;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(56, 189, 248, .6);
+
+            box-shadow:
+                0 15px 50px rgba(0, 0, 0, .4),
+                0 0 30px rgba(14, 165, 233, .15);
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: rgba(14, 165, 233, .1);
+            border: 1px solid rgba(56, 189, 248, .25);
+
+            color: #38bdf8;
+
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .glass-card h4 {
+            color: white;
+            font-weight: 700;
+        }
+
+        .glass-card p {
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        /* ==============================
+           SKILLS
+        ============================== */
+
+        .skill {
+            margin-bottom: 25px;
+        }
+
+        .skill-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+        }
+
+        .progress {
+            height: 7px;
+            background: #0f172a;
+            border-radius: 20px;
+        }
+
+        .progress-bar {
+            background: linear-gradient(
+                90deg,
+                #0284c7,
+                #38bdf8
+            );
+
+            box-shadow: 0 0 15px rgba(56, 189, 248, .5);
+        }
+
+        /* ==============================
+           EXPERIENCE
+        ============================== */
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(
+                #38bdf8,
+                transparent
+            );
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 65px;
+            margin-bottom: 45px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 10px;
+            top: 5px;
+
+            width: 22px;
+            height: 22px;
+
+            border-radius: 50%;
+
+            background: #38bdf8;
+
+            box-shadow:
+                0 0 10px #38bdf8,
+                0 0 30px rgba(56, 189, 248, .6);
+        }
+
+        .timeline-item h4 {
+            color: white;
+        }
+
+        .timeline-item .company {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .timeline-item p {
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        /* ==============================
+           CLIENTS
+        ============================== */
+
+        .client-box {
+            text-align: center;
+            padding: 25px;
+            margin-bottom: 20px;
+
+            border: 1px solid rgba(56, 189, 248, .12);
+            border-radius: 12px;
+
+            background: rgba(15, 23, 42, .55);
+
+            color: #cbd5e1;
+
+            transition: .3s;
+        }
+
+        .client-box:hover {
+            color: #38bdf8;
+            border-color: #38bdf8;
+            transform: scale(1.04);
+            box-shadow: 0 0 25px rgba(56, 189, 248, .15);
+        }
+
+        /* ==============================
+           STATS
+        ============================== */
+
+        .stat {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .stat h2 {
+            font-family: 'Orbitron';
+            color: #38bdf8;
+            font-size: 45px;
+        }
+
+        .stat p {
+            color: #94a3b8;
+        }
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            background: rgba(2, 6, 23, .9);
+            border-top: 1px solid rgba(56, 189, 248, .1);
+            color: #64748b;
+        }
+
+        footer span {
+            color: #38bdf8;
+        }
+
+        /* ==============================
+           3D FLOATING LABEL
+        ============================== */
+
+        .floating-label {
+            position: absolute;
+            right: 8%;
+            top: 35%;
+            padding: 15px 20px;
+
+            border: 1px solid rgba(56, 189, 248, .3);
+            border-radius: 10px;
+
+            background: rgba(2, 6, 23, .55);
+            backdrop-filter: blur(10px);
+
+            color: #38bdf8;
+
+            animation: floating 4s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @media(max-width: 768px) {
+
+            .floating-label {
+                display: none;
+            }
+
+            .hero {
+                text-align: center;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .timeline::before {
+                left: 10px;
+            }
+
+            .timeline-item {
+                padding-left: 40px;
+            }
+
+            .timeline-dot {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =====================================
+     THREE.JS BACKGROUND
+===================================== -->
+
+<div id="three-container"></div>
+
+
+<!-- =====================================
+     NAVBAR
+===================================== -->
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="#">
+            VIKASH YADAV
+        </a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#skills">Skills</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#experience">Experience</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#projects">Projects</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================
+     HERO
+===================================== -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-content">
+
+            <div class="badge-tech">
+                INDUSTRIAL AUTOMATION • PLC • ROBOTICS
+            </div>
+
+            <h1>
+                Vikash <span>Yadav</span>
+            </h1>
+
+            <h2>
+                PLC Programmer & Industrial Automation Specialist
+            </h2>
+
+            <p>
+                Experienced automation professional specializing in
+                PLC Programming, Robotics, Servo Motors, Traceability,
+                Vision Systems and Industrial Automation solutions.
+            </p>
+
+            <div>
+
+                <a href="#experience"
+                   class="btn btn-main">
+                    Explore My Experience
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="floating-label">
+        ⚙ INDUSTRIAL AUTOMATION
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     ABOUT
+===================================== -->
+
+<section id="about">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            About <span>Me</span>
+        </h2>
+
+        <div class="row g-4">
+
+            <div class="col-lg-8">
+
+                <div class="glass-card">
+
+                    <div class="icon">
+                        ⚙
+                    </div>
+
+                    <h4>
+                        PLC Programmer & Automation Professional
+                    </h4>
+
+                    <p>
+                        I am Vikash Yadav, a PLC Programmer and Industrial
+                        Automation professional with practical experience
+                        in designing, programming, commissioning and
+                        troubleshooting industrial automation systems.
+                    </p>
+
+                    <p>
+                        My experience covers PLC programming, robotics,
+                        servo motor systems, traceability solutions,
+                        industrial vision systems, Festo automation,
+                        laser marking, barcode systems and industrial
+                        printers.
+                    </p>
+
+                    <p>
+                        I have worked on projects for major automotive,
+                        manufacturing and technology organizations,
+                        delivering automation solutions focused on
+                        productivity, quality, traceability and reliable
+                        machine operation.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="glass-card">
+
+                    <h4 class="mb-4">
+                        Professional Focus
+                    </h4>
+
+                    <p>⚡ PLC Programming</p>
+                    <p>🤖 Robotics</p>
+                    <p>🔩 Servo Motor Automation</p>
+                    <p>👁 Vision Inspection</p>
+                    <p>🏭 Industrial Automation</p>
+                    <p>📦 Traceability Systems</p>
+                    <p>🔖 Barcode & Laser Marking</p>
+                    <p>🖨 Industrial Printers</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     STATS
+===================================== -->
+
+<section>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="stat">
+                    <h2>25+</h2>
+                    <p>Companies / Clients</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="stat">
+                    <h2>6+</h2>
+                    <p>Major Companies</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="stat">
+                    <h2>100+</h2>
+                    <p>Automation Tasks</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="stat">
+                    <h2>∞</h2>
+                    <p>Passion for Automation</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     SKILLS
+===================================== -->
+
+<section id="skills">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Technical <span>Skills</span>
+        </h2>
+
+        <div class="row">
+
+            <div class="col-lg-6">
+
+                <div class="glass-card">
+
+                    <div class="skill">
+
+                        <div class="skill-title">
+                            <span>PLC Programming</span>
+                            <span>95%</span>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar"
+                                 style="width:95%">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="skill">
+
+                        <div class="skill-title">
+                            <span>Industrial Automation</span>
+                            <span>95%</span>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar"
+                                 style="width:95%">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="skill">
+
+                        <div class="skill-title">
+                            <span>Robotics</span>
+                            <span>90%</span>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar"
+                                 style="width:90%">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="skill">
+
+                        <div class="skill-title">
+                            <span>Servo Motor Systems</span>
+                            <span>90%</span>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar"
+                                 style="width:90%">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <div class="glass-card">
+
+                    <div class="skill">
+
+                        <div class="skill-title">
+                            <span>Vision Systems</span>
+                            <span>90%</span>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar"
+                                 style="width:90%">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="skill">
+
+                        <div class="skill-title">
+                            <span>Traceability Systems</span>
+                            <span>90%</span>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar"
+                                 style="width:90%">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="skill">
+
+                        <div class="skill-title">
+                            <span>Barcode & Laser Marking</span>
+                            <span>90%</span>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar"
+                                 style="width:90%">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="skill">
+
+                        <div class="skill-title">
+                            <span>Festo Automation</span>
+                            <span>85%</span>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar"
+                                 style="width:85%">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     EXPERIENCE
+===================================== -->
+
+<section id="experience">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Professional <span>Experience</span>
+        </h2>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="glass-card">
+
+                    <h4>
+                        PLC Programmer & Automation Engineer
+                    </h4>
+
+                    <div class="company">
+                        Authentic Engineers
+                    </div>
+
+                    <p class="mt-3">
+                        Worked on industrial automation projects involving
+                        PLC programming, machine automation, robotics,
+                        servo systems, traceability, vision inspection,
+                        barcode systems and industrial communication.
+                    </p>
+
+                    <p>
+                        Responsible for PLC logic development,
+                        commissioning, troubleshooting, machine integration
+                        and automation system implementation.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     TECHNOLOGIES
+===================================== -->
+
+<section>
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Automation <span>Expertise</span>
+        </h2>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="glass-card">
+
+                    <div class="icon">
+                        ⚡
+                    </div>
+
+                    <h4>PLC & Control</h4>
+
+                    <p>
+                        PLC programming, machine sequencing,
+                        interlocking, alarms, sensors, actuators,
+                        industrial communication and machine control.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="glass-card">
+
+                    <div class="icon">
+                        🤖
+                    </div>
+
+                    <h4>Robotics & Servo</h4>
+
+                    <p>
+                        Robotics integration, servo motor control,
+                        motion systems, positioning, synchronization
+                        and automated production processes.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="glass-card">
+
+                    <div class="icon">
+                        👁
+                    </div>
+
+                    <h4>Vision Systems</h4>
+
+                    <p>
+                        Industrial vision inspection, quality checking,
+                        camera integration, image-based verification
+                        and automated inspection.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="glass-card">
+
+                    <div class="icon">
+                        🔍
+                    </div>
+
+                    <h4>Traceability</h4>
+
+                    <p>
+                        Product traceability, barcode scanning,
+                        production data tracking and manufacturing
+                        identification systems.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="glass-card">
+
+                    <div class="icon">
+                        🔖
+                    </div>
+
+                    <h4>Laser Marking</h4>
+
+                    <p>
+                        Keyence laser marking, barcode generation,
+                        product identification and industrial
+                        marking applications.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="glass-card">
+
+                    <div class="icon">
+                        🖨
+                    </div>
+
+                    <h4>Industrial Printing</h4>
+
+                    <p>
+                        Integration and troubleshooting of different
+                        industrial barcode and product printing
+                        systems.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     PROJECT CLIENTS
+===================================== -->
+
+<section id="projects">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Projects & <span>Clients</span>
+        </h2>
+
+        <p class="text-center text-secondary mb-5">
+            Automation projects handled for leading organizations
+        </p>
+
+        <div class="row">
+
+            <div class="col-md-4 col-lg-3">
+                <div class="client-box">
+                    UNO Minda
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-3">
+                <div class="client-box">
+                    Rinder
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-3">
+                <div class="client-box">
+                    Lumax
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-3">
+                <div class="client-box">
+                    VVDN
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-3">
+                <div class="client-box">
+                    Sunvior
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-3">
+                <div class="client-box">
+                    Maruti
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-3">
+                <div class="client-box">
+                    25+ More Companies
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-3">
+                <div class="client-box">
+                    Industrial Projects
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     CTA
+===================================== -->
+
+<section>
+
+    <div class="container">
+
+        <div class="glass-card text-center p-5">
+
+            <h2 class="mb-3">
+                Building Smarter <span style="color:#38bdf8;">
+                    Industrial Systems
+                </span>
+            </h2>
+
+            <p class="text-secondary">
+                Automation • Robotics • PLC • Vision • Traceability
+                • Motion Control
+            </p>
+
+            <a href="#about"
+               class="btn btn-main">
+                View Profile
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer>
+
+    <div class="container">
+
+        <p class="mb-0">
+            © 2026 <span>Vikash Yadav</span> |
+            PLC Programmer & Industrial Automation
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- =====================================
+     THREE.JS 3D ENGINE
+===================================== -->
+
+<script>
+
+const container = document.getElementById("three-container");
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    2000
+);
+
+camera.position.z = 35;
+
+
+/* Renderer */
+
+const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true
+});
+
+renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio, 2)
+);
+
+renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+);
+
+container.appendChild(renderer.domElement);
+
+
+/* ==============================
+   PARTICLE SYSTEM
+============================== */
+
+const particleCount = 1800;
+
+const positions = new Float32Array(
+    particleCount * 3
+);
+
+for (let i = 0; i < particleCount; i++) {
+
+    positions[i * 3] =
+        (Math.random() - .5) * 160;
+
+    positions[i * 3 + 1] =
+        (Math.random() - .5) * 100;
+
+    positions[i * 3 + 2] =
+        (Math.random() - .5) * 100;
+}
+
+const particleGeometry =
+    new THREE.BufferGeometry();
+
+particleGeometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(
+        positions,
+        3
+    )
+);
+
+const particleMaterial =
+    new THREE.PointsMaterial({
+
+        color: 0x38bdf8,
+
+        size: .12,
+
+        transparent: true,
+
+        opacity: .7
+
+    });
+
+const particles =
+    new THREE.Points(
+        particleGeometry,
+        particleMaterial
+    );
+
+scene.add(particles);
+
+
+/* ==============================
+   3D CENTRAL INDUSTRIAL OBJECT
+============================== */
+
+const group = new THREE.Group();
+
+scene.add(group);
+
+
+/* Main Cube */
+
+const cubeGeometry =
+    new THREE.BoxGeometry(
+        8,
+        8,
+        8
+    );
+
+const cubeMaterial =
+    new THREE.MeshBasicMaterial({
+
+        color: 0x0ea5e9,
+
+        wireframe: true,
+
+        transparent: true,
+
+        opacity: .35
+
+    });
+
+const cube =
+    new THREE.Mesh(
+        cubeGeometry,
+        cubeMaterial
+    );
+
+group.add(cube);
+
+
+/* Inner Cube */
+
+const innerGeometry =
+    new THREE.BoxGeometry(
+        5,
+        5,
+        5
+    );
+
+const innerMaterial =
+    new THREE.MeshBasicMaterial({
+
+        color: 0x38bdf8,
+
+        wireframe: true,
+
+        transparent: true,
+
+        opacity: .25
+
+    });
+
+const innerCube =
+    new THREE.Mesh(
+        innerGeometry,
+        innerMaterial
+    );
+
+group.add(innerCube);
+
+
+/* ==============================
+   INDUSTRIAL RINGS
+============================== */
+
+for (let i = 0; i < 3; i++) {
+
+    const ringGeometry =
+        new THREE.TorusGeometry(
+            7 + i * 2,
+            .04,
+            16,
+            100
+        );
+
+    const ringMaterial =
+        new THREE.MeshBasicMaterial({
+            color: 0x38bdf8,
+            transparent: true,
+            opacity: .35
+        });
+
+    const ring =
+        new THREE.Mesh(
+            ringGeometry,
+            ringMaterial
+        );
+
+    ring.rotation.x =
+        Math.random() * Math.PI;
+
+    ring.rotation.y =
+        Math.random() * Math.PI;
+
+    group.add(ring);
+}
+
+
+/* ==============================
+   TECH NODES
+============================== */
+
+const nodes = [];
+
+const nodeNames = [
+    "PLC",
+    "ROBOTICS",
+    "SERVO",
+    "VISION",
+    "TRACEABILITY",
+    "BARCODE"
+];
+
+for (let i = 0; i < nodeNames.length; i++) {
+
+    const angle =
+        (i / nodeNames.length) *
+        Math.PI * 2;
+
+    const radius = 15;
+
+    const geometry =
+        new THREE.SphereGeometry(
+            .35,
+            16,
+            16
+        );
+
+    const material =
+        new THREE.MeshBasicMaterial({
+            color: 0x38bdf8
+        });
+
+    const node =
+        new THREE.Mesh(
+            geometry,
+            material
+        );
+
+    node.position.x =
+        Math.cos(angle) * radius;
+
+    node.position.y =
+        Math.sin(angle) * radius;
+
+    node.position.z =
+        Math.sin(angle * 2) * 4;
+
+    scene.add(node);
+
+    nodes.push(node);
+
+
+    /* Connection Line */
+
+    const lineGeometry =
+        new THREE.BufferGeometry()
+            .setFromPoints([
+
+                new THREE.Vector3(
+                    0,
+                    0,
+                    0
+                ),
+
+                node.position
+
+            ]);
+
+    const lineMaterial =
+        new THREE.LineBasicMaterial({
+            color: 0x0ea5e9,
+            transparent: true,
+            opacity: .25
+        });
+
+    const line =
+        new THREE.Line(
+            lineGeometry,
+            lineMaterial
+        );
+
+    scene.add(line);
+}
+
+
+/* ==============================
+   MOUSE INTERACTION
+============================== */
+
+let mouseX = 0;
+let mouseY = 0;
+
+document.addEventListener(
+    "mousemove",
+    function(event) {
+
+        mouseX =
+            (event.clientX /
+                window.innerWidth -
+                .5) * 2;
+
+        mouseY =
+            (event.clientY /
+                window.innerHeight -
+                .5) * 2;
+
+    }
+);
+
+
+/* ==============================
+   ANIMATION
+============================== */
+
+const clock =
+    new THREE.Clock();
+
+function animate() {
+
+    requestAnimationFrame(
+        animate
+    );
+
+    const time =
+        clock.getElapsedTime();
+
+
+    /* Particle rotation */
+
+    particles.rotation.y =
+        time * .015;
+
+    particles.rotation.x =
+        Math.sin(time * .1) * .05;
+
+
+    /* Central object */
+
+    group.rotation.x += .0015;
+    group.rotation.y += .003;
+
+
+    /* Mouse movement */
+
+    scene.rotation.y +=
+        (mouseX * .08 -
+        scene.rotation.y) * .01;
+
+    scene.rotation.x +=
+        (mouseY * .04 -
+        scene.rotation.x) * .01;
+
+
+    /* Floating nodes */
+
+    nodes.forEach(
+        (node, i) => {
+
+            node.position.z +=
+                Math.sin(
+                    time * 1.2 + i
+                ) * .003;
+
+        }
+    );
+
+
+    renderer.render(
+        scene,
+        camera
+    );
+}
+
+animate();
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+window.addEventListener(
+    "resize",
+    function() {
+
+        camera.aspect =
+            window.innerWidth /
+            window.innerHeight;
+
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(
+            window.innerWidth,
+            window.innerHeight
+        );
+
+    }
+);
+
+</script>
+
+</body>
+</html>
