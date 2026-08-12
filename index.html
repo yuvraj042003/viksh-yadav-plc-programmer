@@ -487,6 +487,222 @@
                 left: 0;
             }
         }
+
+        /* ==============================
+           YOUTUBE / VLOG SECTION
+        ============================== */
+
+        .youtube-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .youtube-hero {
+            position: relative;
+            padding: 55px 35px;
+            border-radius: 28px;
+            background:
+                radial-gradient(circle at 90% 10%, rgba(239,68,68,.18), transparent 35%),
+                linear-gradient(135deg, rgba(15,23,42,.92), rgba(8,47,73,.55));
+            border: 1px solid rgba(248,113,113,.22);
+            box-shadow: 0 25px 80px rgba(0,0,0,.35);
+            overflow: hidden;
+        }
+
+        .youtube-hero::before {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            right: -100px;
+            top: -120px;
+            border-radius: 50%;
+            background: rgba(239,68,68,.12);
+            filter: blur(10px);
+        }
+
+        .youtube-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border-radius: 50px;
+            background: rgba(239,68,68,.10);
+            border: 1px solid rgba(248,113,113,.35);
+            color: #fca5a5;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: .8px;
+        }
+
+        .youtube-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 800;
+            margin: 18px 0 12px;
+        }
+
+        .youtube-title span {
+            color: #f87171;
+            text-shadow: 0 0 25px rgba(248,113,113,.35);
+        }
+
+        .youtube-description {
+            color: #94a3b8;
+            max-width: 760px;
+            line-height: 1.8;
+            margin-bottom: 28px;
+        }
+
+        .youtube-main-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 23px;
+            border-radius: 10px;
+            background: #ef4444;
+            border: 1px solid #f87171;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 800;
+            box-shadow: 0 0 30px rgba(239,68,68,.25);
+            transition: .3s;
+        }
+
+        .youtube-main-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            background: #dc2626;
+            color: #fff;
+            box-shadow: 0 0 45px rgba(239,68,68,.42);
+        }
+
+        .youtube-card {
+            height: 100%;
+            overflow: hidden;
+            border-radius: 18px;
+            background: rgba(15,23,42,.82);
+            border: 1px solid rgba(56,189,248,.14);
+            transition: .4s;
+        }
+
+        .youtube-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(248,113,113,.55);
+            box-shadow: 0 18px 50px rgba(0,0,0,.4), 0 0 30px rgba(239,68,68,.12);
+        }
+
+        .youtube-thumb {
+            position: relative;
+            height: 185px;
+            overflow: hidden;
+            background:
+                linear-gradient(135deg, rgba(2,132,199,.75), rgba(239,68,68,.72)),
+                radial-gradient(circle at 25% 25%, #38bdf8, transparent 35%),
+                #020617;
+        }
+
+        .youtube-thumb::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 45%, rgba(0,0,0,.7));
+        }
+
+        .youtube-icon {
+            position: absolute;
+            z-index: 2;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(239,68,68,.95);
+            color: #fff;
+            font-size: 25px;
+            box-shadow: 0 0 0 8px rgba(239,68,68,.12), 0 0 35px rgba(239,68,68,.5);
+            transition: .3s;
+        }
+
+        .youtube-card:hover .youtube-icon {
+            transform: translate(-50%, -50%) scale(1.12);
+        }
+
+        .video-number {
+            position: absolute;
+            z-index: 3;
+            left: 15px;
+            bottom: 12px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: rgba(2,6,23,.72);
+            color: #e2e8f0;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .youtube-card-body {
+            padding: 22px;
+        }
+
+        .youtube-card-body h4 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 9px;
+        }
+
+        .youtube-card-body p {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.65;
+            margin-bottom: 18px;
+        }
+
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: #38bdf8;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .video-link:hover {
+            color: #f87171;
+        }
+
+        .youtube-channel-box {
+            margin-top: 35px;
+            padding: 22px 25px;
+            border-radius: 16px;
+            background: rgba(239,68,68,.06);
+            border: 1px dashed rgba(248,113,113,.28);
+        }
+
+        .youtube-channel-box strong {
+            color: #f8fafc;
+        }
+
+        .youtube-channel-box span {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        @media(max-width: 576px) {
+            .youtube-hero {
+                padding: 38px 22px;
+            }
+
+            .youtube-thumb {
+                height: 170px;
+            }
+        }
+
     </style>
 </head>
 
@@ -508,7 +724,7 @@
     <div class="container">
 
         <a class="navbar-brand" href="#">
-            VIKASH YADAV
+            VIKASH YADAV | Ashish Kumar
         </a>
 
         <button class="navbar-toggler"
@@ -538,6 +754,10 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="#projects">Projects</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#youtube">Vlogs</a>
                 </li>
 
             </ul>
@@ -1143,6 +1363,261 @@
                 <div class="client-box">
                     Industrial Projects
                 </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     YOUTUBE / VLOGS
+===================================== -->
+
+<section id="youtube" class="youtube-section">
+
+    <div class="container">
+
+        <div class="youtube-hero">
+
+            <div class="youtube-badge">
+                ▶ YOUTUBE • INDUSTRIAL AUTOMATION VLOGS
+            </div>
+
+            <h2 class="youtube-title">
+                Explore My <span>Automation Vlogs</span>
+            </h2>
+
+            <p class="youtube-description">
+                Follow real-world automation content covering PLC programming,
+                industrial machines, robotics, servo systems, troubleshooting,
+                commissioning, vision systems, traceability and practical
+                factory-floor experiences.
+            </p>
+
+            <a href="https://www.youtube.com/@Plcvikash"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="youtube-main-btn">
+                ▶ Click Here to Watch on YouTube
+            </a>
+
+            <div class="row g-4 mt-4">
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="youtube-card">
+
+                        <a href="https://www.youtube.com/@Plcvikash"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="Watch PLC programming vlogs">
+
+                            <div class="youtube-thumb">
+                                <div class="youtube-icon">▶</div>
+                                <div class="video-number">VLOG 01</div>
+                            </div>
+
+                        </a>
+
+                        <div class="youtube-card-body">
+                            <h4>PLC Programming & Machine Logic</h4>
+                            <p>
+                                Practical PLC programming, machine sequence,
+                                sensors, interlocks and industrial control logic.
+                            </p>
+
+                            <a class="video-link"
+                               href="https://www.youtube.com/@Plcvikash"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                Watch Vlog <span>→</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="youtube-card">
+
+                        <a href="https://www.youtube.com/@Plcvikash"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="Watch industrial automation vlogs">
+
+                            <div class="youtube-thumb">
+                                <div class="youtube-icon">▶</div>
+                                <div class="video-number">VLOG 02</div>
+                            </div>
+
+                        </a>
+
+                        <div class="youtube-card-body">
+                            <h4>Industrial Automation Projects</h4>
+                            <p>
+                                Machine automation, commissioning, troubleshooting
+                                and real-world industrial project experiences.
+                            </p>
+
+                            <a class="video-link"
+                               href="https://www.youtube.com/@Plcvikash"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                Watch Vlog <span>→</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="youtube-card">
+
+                        <a href="https://www.youtube.com/@Plcvikash"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="Watch robotics and servo vlogs">
+
+                            <div class="youtube-thumb">
+                                <div class="youtube-icon">▶</div>
+                                <div class="video-number">VLOG 03</div>
+                            </div>
+
+                        </a>
+
+                        <div class="youtube-card-body">
+                            <h4>Robotics & Servo Systems</h4>
+                            <p>
+                                Explore robotics, servo motors, motion control,
+                                positioning and automated production systems.
+                            </p>
+
+                            <a class="video-link"
+                               href="https://www.youtube.com/@Plcvikash"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                Watch Vlog <span>→</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="youtube-card">
+
+                        <a href="https://www.youtube.com/@Plcvikash"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="Watch vision system vlogs">
+
+                            <div class="youtube-thumb">
+                                <div class="youtube-icon">▶</div>
+                                <div class="video-number">VLOG 04</div>
+                            </div>
+
+                        </a>
+
+                        <div class="youtube-card-body">
+                            <h4>Vision Inspection Systems</h4>
+                            <p>
+                                Camera integration, inspection, quality checking
+                                and automated image-based verification.
+                            </p>
+
+                            <a class="video-link"
+                               href="https://www.youtube.com/@Plcvikash"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                Watch Vlog <span>→</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="youtube-card">
+
+                        <a href="https://www.youtube.com/@Plcvikash"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="Watch traceability and barcode vlogs">
+
+                            <div class="youtube-thumb">
+                                <div class="youtube-icon">▶</div>
+                                <div class="video-number">VLOG 05</div>
+                            </div>
+
+                        </a>
+
+                        <div class="youtube-card-body">
+                            <h4>Traceability & Barcode Systems</h4>
+                            <p>
+                                Barcode scanning, laser marking, product tracking
+                                and manufacturing traceability solutions.
+                            </p>
+
+                            <a class="video-link"
+                               href="https://www.youtube.com/@Plcvikash"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                Watch Vlog <span>→</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="youtube-card">
+
+                        <a href="https://www.youtube.com/@Plcvikash"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="Watch automation tips and factory vlogs">
+
+                            <div class="youtube-thumb">
+                                <div class="youtube-icon">▶</div>
+                                <div class="video-number">VLOG 06</div>
+                            </div>
+
+                        </a>
+
+                        <div class="youtube-card-body">
+                            <h4>Factory Floor & Automation Tips</h4>
+                            <p>
+                                Useful automation tips, practical troubleshooting,
+                                machine insights and engineering experiences.
+                            </p>
+
+                            <a class="video-link"
+                               href="https://www.youtube.com/@Plcvikash"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                Watch Vlog <span>→</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="youtube-channel-box text-center">
+                <strong>More videos are coming soon.</strong><br>
+                <span>
+                    Visit the channel for the latest PLC, Robotics and Industrial
+                    Automation content.
+                </span>
             </div>
 
         </div>
